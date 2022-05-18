@@ -57,6 +57,8 @@ public class FirstPersonController : MonoBehaviour
 	private float _verticalVelocity;
 	private float _terminalVelocity = 53.0f;
 
+
+
 	// timeout deltatime
 	private float _jumpTimeoutDelta;
 	private float _fallTimeoutDelta;
@@ -102,6 +104,9 @@ public class FirstPersonController : MonoBehaviour
 		// reset our timeouts on start
 		_jumpTimeoutDelta = JumpTimeout;
 		_fallTimeoutDelta = FallTimeout;
+
+		if (GetComponent<Rigidbody>())
+			GetComponent<Rigidbody>().freezeRotation = true;
 	}
 
 	private void Update()
@@ -115,7 +120,7 @@ public class FirstPersonController : MonoBehaviour
 
 	private void LateUpdate()
 	{
-		CameraRotation();
+
 	}
 
 	private void GroundedCheck()
@@ -125,32 +130,7 @@ public class FirstPersonController : MonoBehaviour
 		Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers, QueryTriggerInteraction.Ignore);
 	}
 
-	private void CameraRotation()
-	{
-		// if there is an input
-		if (_input.look.sqrMagnitude >= _threshold)
-		{
-			//Don't multiply mouse input by Time.deltaTime
-			float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-			_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-			_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
-
-			// clamp our pitch rotation
-			_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
-			// Update Cinemachine camera target pitch
-			CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
-
-			// rotate the player left and right
-			transform.Rotate(Vector3.up * _rotationVelocity);
-
-			if (isTorchOn)
-			{
-				torch.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
-			}
-		}
-	}
 
 	private void Move()
 	{
@@ -302,6 +282,5 @@ public class FirstPersonController : MonoBehaviour
 
 		// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 		Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
-		Gizmos.DrawRay(CinemachineCameraTarget.transform.position, CinemachineCameraTarget.transform.forward*5);
 	}
 }
