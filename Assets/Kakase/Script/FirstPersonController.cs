@@ -41,8 +41,6 @@ public class FirstPersonController : MonoBehaviour
 	public LayerMask GroundLayers;
 
 	[Header("Cinemachine")]
-	[Tooltip("The follow target set in the Cinemachine Virtual Camera that the camera will follow")]
-	public GameObject CinemachineCameraTarget;
 	[Tooltip("How far in degrees can you move the camera up")]
 	public float TopClamp = 90.0f;
 	[Tooltip("How far in degrees can you move the camera down")]
@@ -82,17 +80,13 @@ public class FirstPersonController : MonoBehaviour
 
 
 	private RaycastHit contact;
-
+	public GameObject 主摄像机;
 	//===================kakase========
 
 
 	private void Awake()
 	{
-		// get a reference to our main camera
-		if (_mainCamera == null)
-		{
-			_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-		}
+		主摄像机 = GameObject.FindGameObjectWithTag("MainCamera");
 	}
 
 	private void Start()
@@ -101,12 +95,12 @@ public class FirstPersonController : MonoBehaviour
 		_input = GetComponent<StarterAssetsInputs>();
 		_playerInput = GetComponent<PlayerInput>();
 
+
+
 		// reset our timeouts on start
 		_jumpTimeoutDelta = JumpTimeout;
 		_fallTimeoutDelta = FallTimeout;
 
-		if (GetComponent<Rigidbody>())
-			GetComponent<Rigidbody>().freezeRotation = true;
 	}
 
 	private void Update()
@@ -118,12 +112,11 @@ public class FirstPersonController : MonoBehaviour
 		interact();
 	}
 
-	private void LateUpdate()
-	{
-
-	}
-
-	private void GroundedCheck()
+    private void LateUpdate()
+    {
+		手电筒();
+    }
+    private void GroundedCheck()
 	{
 		// set sphere position, with offset
 		Vector3 spherePosition = new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z);
@@ -237,15 +230,18 @@ public class FirstPersonController : MonoBehaviour
 
 	//====================================kakase=================================
 
+	private void 手电筒()
+    {
+		if(Input.GetKeyDown("f"))
+        {
+			torch.enabled = !torch.enabled;
+		}
+		torch.transform.localEulerAngles = 主摄像机.transform.localEulerAngles;
+    }
 
 
 	private void useItem()
 	{
-		//手电筒
-		if (Input.GetKeyDown("f"))
-		{
-			torch.enabled = !torch.enabled;
-		}
 
 	}
 
@@ -254,7 +250,7 @@ public class FirstPersonController : MonoBehaviour
 
 		if (Input.GetKeyDown("e"))
 		{
-			if(Physics.Raycast(CinemachineCameraTarget.transform.position, CinemachineCameraTarget.transform.forward, out contact, 5f,64))
+			if(Physics.Raycast(主摄像机.transform.position, 主摄像机.transform.forward, out contact, 5f,64))
             {
 				//Debug.Log(contact.transform.gameObject.tag);
 				Debug.Log(contact.transform.gameObject.name);
@@ -267,20 +263,18 @@ public class FirstPersonController : MonoBehaviour
 		}
 	}
 
-
 	//====================================kakase=================================
-
-
 
 	private void OnDrawGizmosSelected()
 	{
 		Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
 		Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
-		if (Grounded) Gizmos.color = transparentGreen;
-		else Gizmos.color = transparentRed;
+		if (Grounded) Gizmos.color = transparentRed;
+		else Gizmos.color = transparentGreen;
 
 		// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 		Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		Gizmos.DrawRay(new Ray(主摄像机.transform.position, 主摄像机.transform.forward*5));
 	}
 }
