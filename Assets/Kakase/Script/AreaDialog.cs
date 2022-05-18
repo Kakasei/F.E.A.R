@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class AreaDialog : MonoBehaviour
 {
     public Text dialogSystem;
-    public string dialog;
+    public string dialog;//wj
 
     private void OnTriggerEnter(Collider other)
     {
