@@ -44,9 +44,6 @@ public class DialogSystem : MonoBehaviour
             }
                 
         }
-/*
-        if (Time.time - instantiateTime >= continueTime)
-            disappearing = true;*/
 
         if (disappearing)
         {

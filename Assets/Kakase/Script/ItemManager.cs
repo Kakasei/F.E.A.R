@@ -12,7 +12,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private Image itemImage;
     private int itemID = 0;     //0 «ø’ ÷,2 «key01£¨
     private int itemCount = 2;
-    private List<bool> hasItem = new List<bool>(new bool[100]);
+    public List<bool> hasItem = new List<bool>(new bool[100]);
     
 
 
