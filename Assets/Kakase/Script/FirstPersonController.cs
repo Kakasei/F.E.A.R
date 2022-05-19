@@ -79,7 +79,7 @@ public class FirstPersonController : MonoBehaviour
 
 
 
-	private RaycastHit contact;
+	private RaycastHit 交互射线信息;
 	public GameObject 主摄像机;
 	//===================kakase========
 
@@ -109,7 +109,7 @@ public class FirstPersonController : MonoBehaviour
 		GroundedCheck();
 		Move();
 		useItem();
-		interact();
+		交互();
 	}
 
     private void LateUpdate()
@@ -245,18 +245,20 @@ public class FirstPersonController : MonoBehaviour
 
 	}
 
-	private void interact()
+	private void 交互()
     {
-
 		if (Input.GetKeyDown("e"))
 		{
-			if(Physics.Raycast(主摄像机.transform.position, 主摄像机.transform.forward, out contact, 5f,64))
+			//按下e的时候，从眼睛处发射一条长度为5f的射线，射线触碰到的第一个物体的信息被装在“交互射线信息”里
+			//最后一个参数64的意义：64的二进制1000000，表示该射线只会与第六图层产生碰撞
+			if(Physics.Raycast(主摄像机.transform.position, 主摄像机.transform.forward, out 交互射线信息, 5f,64))
             {
-				//Debug.Log(contact.transform.gameObject.tag);
-				Debug.Log(contact.transform.gameObject.name);
-				if(contact.transform.CompareTag("item"))
+				Debug.Log(交互射线信息.transform.gameObject.name);
+				if(交互射线信息.transform.CompareTag("item"))
 				{
-					contact.transform.gameObject.SendMessage("contact");
+					//
+					交互射线信息.transform.gameObject.SendMessage("contact",SendMessageOptions.DontRequireReceiver);
+					交互射线信息.transform.gameObject.SendMessage("被交互",SendMessageOptions.DontRequireReceiver);
 				}
             }
 
