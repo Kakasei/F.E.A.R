@@ -10,16 +10,10 @@ public class 可拾取道具 : MonoBehaviour
     public Text dialogSystem;
     public string itemName;
 
-    public void 被交互()
-    {
-
-    }
-
     public void contact()
     {
         dialogSystem.SendMessage("ShowDialog", "获得了" + itemName);
         IM.获得道具(itemID);
-        //IM.addItem(itemID);
         Destroy(gameObject);
     }
 }

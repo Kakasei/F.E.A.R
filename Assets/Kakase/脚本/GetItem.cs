@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,8 +13,8 @@ public class GetItem : MonoBehaviour
 
     public void contact()
     {
-        dialogSystem.SendMessage("ShowDialog", "»ñµÃÁË"+itemName);
-        IM.»ñµÃµÀ¾ß(itemID);
+        dialogSystem.SendMessage("ShowDialog", "è·å¾—äº†" + itemName);
+        IM.è·å¾—é“å…·(itemID);
         //IM.addItem(itemID);
         Destroy(gameObject);
     }

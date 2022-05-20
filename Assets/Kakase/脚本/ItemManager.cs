@@ -11,13 +11,13 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] private Image itemImage;
 
-    //private int µÀ¾ßID = 0;     //0ÊÇ¿ÕÊÖ,2ÊÇkey01£¬
+    //private int é“å…·ID = 0;     //0æ˜¯ç©ºæ‰‹,2æ˜¯key01ï¼Œ
     //private int itemCount = 2;
     //public List<bool> hasItem = new List<bool>(new bool[100]);
 
-    public int µ±Ç°ÊÖ³ÖµÄµÀ¾ßID = 0;     //Ä¬ÈÏÎª¿ÕÊÖ×´Ì¬
-    private int ³ÖÓĞµÀ¾ßÖÖÀà = 2;
-    public List<int> µÀ¾ßÊıÁ¿ = new List<int>(new int[100]);
+    public int å½“å‰æ‰‹æŒçš„é“å…·ID = 0;     //é»˜è®¤ä¸ºç©ºæ‰‹çŠ¶æ€
+    private int æŒæœ‰é“å…·ç§ç±» = 2;
+    public List<int> é“å…·æ•°é‡ = new List<int>(new int[100]);
 
 
     void Start()
@@ -25,33 +25,33 @@ public class ItemManager : MonoBehaviour
         //hasItem[0] = true;
         //hasItem[1] = true;
         itemImage = UI.GetComponentInChildren<Image>();
-        µÀ¾ßÊıÁ¿[0] = 1;
-        µÀ¾ßÊıÁ¿[1] = 1;
+        é“å…·æ•°é‡[0] = 1;
+        é“å…·æ•°é‡[1] = 1;
     }
 
     void Update()
     {
-        Êó±ê¹öÂÖÇĞ»»µÀ¾ß();
+        é¼ æ ‡æ»šè½®åˆ‡æ¢é“å…·();
     }
 
-    private void Êó±ê¹öÂÖÇĞ»»µÀ¾ß()
+    private void é¼ æ ‡æ»šè½®åˆ‡æ¢é“å…·()
     {
-        //Êó±êÏòÉÏ¹ö¶¯£¬Öµ>0£¬·´Ö®Í¬Àí
-        float ¹öÂÖÇãÏò = Input.GetAxis("Mouse ScrollWheel");
+        //é¼ æ ‡å‘ä¸Šæ»šåŠ¨ï¼Œå€¼>0ï¼Œåä¹‹åŒç†
+        float æ»šè½®å€¾å‘ = Input.GetAxis("Mouse ScrollWheel");
 
-        if (¹öÂÖÇãÏò > 0)
+        if (æ»šè½®å€¾å‘ > 0)
         {
-            µ±Ç°ÊÖ³ÖµÄµÀ¾ßID++;
-            µ±Ç°ÊÖ³ÖµÄµÀ¾ßID=IDºÏ·¨»¯(µ±Ç°ÊÖ³ÖµÄµÀ¾ßID, ¹öÂÖÇãÏò);
+            å½“å‰æ‰‹æŒçš„é“å…·ID++;
+            å½“å‰æ‰‹æŒçš„é“å…·ID=IDåˆæ³•åŒ–(å½“å‰æ‰‹æŒçš„é“å…·ID, æ»šè½®å€¾å‘);
 
-            scrollItemUI(µ±Ç°ÊÖ³ÖµÄµÀ¾ßID);
+            scrollItemUI(å½“å‰æ‰‹æŒçš„é“å…·ID);
         }
-        else if (¹öÂÖÇãÏò < 0)
+        else if (æ»šè½®å€¾å‘ < 0)
         {
-            µ±Ç°ÊÖ³ÖµÄµÀ¾ßID--;
-            µ±Ç°ÊÖ³ÖµÄµÀ¾ßID=IDºÏ·¨»¯(µ±Ç°ÊÖ³ÖµÄµÀ¾ßID, ¹öÂÖÇãÏò);
+            å½“å‰æ‰‹æŒçš„é“å…·ID--;
+            å½“å‰æ‰‹æŒçš„é“å…·ID=IDåˆæ³•åŒ–(å½“å‰æ‰‹æŒçš„é“å…·ID, æ»šè½®å€¾å‘);
 
-            scrollItemUI(µ±Ç°ÊÖ³ÖµÄµÀ¾ßID);
+            scrollItemUI(å½“å‰æ‰‹æŒçš„é“å…·ID);
         }
     }
 
@@ -61,21 +61,21 @@ public class ItemManager : MonoBehaviour
     }
 
     
-    private int IDºÏ·¨»¯(int ID,float ¹öÂÖÇãÏò)
+    private int IDåˆæ³•åŒ–(int ID,float æ»šè½®å€¾å‘)
     {
-        if(¹öÂÖÇãÏò>0)
+        if(æ»šè½®å€¾å‘>0)
         {
-            while (ID > 99||µÀ¾ßÊıÁ¿[ID]==0)   //¼ì²éÊÇ·ñÉÏÔ½½ç
+            while (ID > 99||é“å…·æ•°é‡[ID]==0)   //æ£€æŸ¥æ˜¯å¦ä¸Šè¶Šç•Œ
             {
                 ID++;
-                if (ID > 99) ID = 0;   //IDÉÏÔ½½çºóÖÃÁã
+                if (ID > 99) ID = 0;   //IDä¸Šè¶Šç•Œåç½®é›¶
             }
-        }else if(¹öÂÖÇãÏò<0)
+        }else if(æ»šè½®å€¾å‘<0)
         {
-            while (ID < 0 || µÀ¾ßÊıÁ¿[ID] == 0)    //¼ì²éÊÇ·ñÏÂÔ½½ç
+            while (ID < 0 || é“å…·æ•°é‡[ID] == 0)    //æ£€æŸ¥æ˜¯å¦ä¸‹è¶Šç•Œ
             {
                 ID--;
-                if (ID <0) ID = 99;   //IDÏÂÔ½½çºóÖÃÂú
+                if (ID <0) ID = 99;   //IDä¸‹è¶Šç•Œåç½®æ»¡
             }
         }
         return ID;
@@ -102,20 +102,20 @@ public class ItemManager : MonoBehaviour
         return n;
     }*/
     /*
-    public void addItem(int µÀ¾ßID)
+    public void addItem(int é“å…·ID)
     {
-        hasItem[µÀ¾ßID] = true;
+        hasItem[é“å…·ID] = true;
         itemCount++;
     }
     *//*
-    public bool useItem(int µÀ¾ßID)
+    public bool useItem(int é“å…·ID)
     {
-        if(hasItem[µÀ¾ßID])
+        if(hasItem[é“å…·ID])
         {
-            hasItem[µÀ¾ßID] = false;
-            µÀ¾ßID++;
-            µÀ¾ßID = ClampItem1(µÀ¾ßID);
-            scrollItemUI(µÀ¾ßID);
+            hasItem[é“å…·ID] = false;
+            é“å…·ID++;
+            é“å…·ID = ClampItem1(é“å…·ID);
+            scrollItemUI(é“å…·ID);
             return true;
         }else
         {
@@ -123,15 +123,15 @@ public class ItemManager : MonoBehaviour
         }
     }
     */
-    public bool ÏûºÄµÀ¾ß(int µÀ¾ßID)
+    public bool æ¶ˆè€—é“å…·(int é“å…·ID)
     {
-        if(µÀ¾ßÊıÁ¿[µÀ¾ßID]>=1)
+        if(é“å…·æ•°é‡[é“å…·ID]>=1)
         {
-            µÀ¾ßÊıÁ¿[µÀ¾ßID] -=1;
-            if (µÀ¾ßÊıÁ¿[µÀ¾ßID] == 0)
+            é“å…·æ•°é‡[é“å…·ID] -=1;
+            if (é“å…·æ•°é‡[é“å…·ID] == 0)
             {
-                µÀ¾ßID = IDºÏ·¨»¯(µÀ¾ßID + 1, 1); //Èç¹ûÇ¡ºÃµ±Ç°µÀ¾ß±»ÏûºÄ¹âÁË£¬UI¾ÍÏÔÊ¾ÏÂÒ»¸öµÀ¾ß
-                scrollItemUI(µÀ¾ßID);
+                é“å…·ID = IDåˆæ³•åŒ–(é“å…·ID + 1, 1); //å¦‚æœæ°å¥½å½“å‰é“å…·è¢«æ¶ˆè€—å…‰äº†ï¼ŒUIå°±æ˜¾ç¤ºä¸‹ä¸€ä¸ªé“å…·
+                scrollItemUI(é“å…·ID);
             }
             return true;
         }else
@@ -140,9 +140,9 @@ public class ItemManager : MonoBehaviour
         }
     }
     
-    public void »ñµÃµÀ¾ß(int ID)
+    public void è·å¾—é“å…·(int ID)
     {
-        if (µÀ¾ßÊıÁ¿[ID] == 0) ³ÖÓĞµÀ¾ßÖÖÀà++;
-        µÀ¾ßÊıÁ¿[ID]++;
+        if (é“å…·æ•°é‡[ID] == 0) æŒæœ‰é“å…·ç§ç±»++;
+        é“å…·æ•°é‡[ID]++;
     }
 }
