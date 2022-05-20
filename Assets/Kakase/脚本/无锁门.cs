@@ -13,9 +13,9 @@ public class 无锁门 : MonoBehaviour
     private ItemManager 背包管理器;
     public Text 旁白系统;
     public float 旋转速度;
-    Vector3 open = new Vector3(1, 0, 0);
-    Vector3 close = new Vector3(0, 0, 1);
-    Vector3 目标;
+    public Transform open;
+    public Transform close;
+    Transform 目标;
 
     public void Start()
     {
@@ -62,7 +62,7 @@ public class 无锁门 : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(目标), Time.deltaTime * 旋转速度);
+        transform.rotation = Quaternion.Lerp(transform.rotation,目标.rotation,Time.deltaTime * 旋转速度);
     }
 
 }
