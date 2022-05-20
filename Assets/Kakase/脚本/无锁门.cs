@@ -12,11 +12,16 @@ public class 无锁门 : MonoBehaviour
     private bool 已开 = false;
     private ItemManager 背包管理器;
     public Text 旁白系统;
+    public float 旋转速度;
+    Vector3 open = new Vector3(1, 0, 0);
+    Vector3 close = new Vector3(0, 0, 1);
+    Vector3 目标;
 
     public void Start()
     {
         动画器 = GetComponent<Animator>();
         背包管理器 = GameObject.FindWithTag("Player").GetComponent<ItemManager>();
+        目标 = close;
     }
 
     public void 被交互()
@@ -46,14 +51,18 @@ public class 无锁门 : MonoBehaviour
     {
         if (已开)
         {
-            动画器.SetTrigger("关");
+            目标 = close;
             已开 = !已开;
         }
         else
         {
-            动画器.SetTrigger("开");
+            目标 = open;
             已开 = !已开;
         }
+    }
+    private void FixedUpdate()
+    {
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(目标), Time.deltaTime * 旋转速度);
     }
 
 }
