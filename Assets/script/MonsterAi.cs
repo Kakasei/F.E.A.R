@@ -15,6 +15,19 @@ public class MonsterAi : MonoBehaviour
     public NavMeshAgent agent;
     AnimatorStateInfo info;
     // Start is called before the first frame update
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Vector3 v = player.position;
+        if (other.gameObject.tag == "Player")
+        {
+            this.gameObject.GetComponent<Animator>().SetBool("run", true);
+            transform.LookAt(v);
+            agent.speed = 2f;
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+        }
+    }
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -27,7 +40,17 @@ public class MonsterAi : MonoBehaviour
         double stopdistance = 1.5;
         info = ani.GetCurrentAnimatorStateInfo(0);
         float distance = Vector3.Distance(player.position, transform.position);
-        switch (CurrentState)
+
+        
+        if(distance <= stopdistance)
+        {
+            this.gameObject.GetComponent<Animator>().SetBool("run", false);
+            
+        }
+        
+
+
+        /*switch (CurrentState)
         {
             case EnemyState.idle:
                 if (distance > stopdistance)
@@ -49,6 +72,6 @@ public class MonsterAi : MonoBehaviour
                 agent.isStopped = false;
                 agent.SetDestination(player.position);
                 break;
-        }
+        }*/
     }
 }
