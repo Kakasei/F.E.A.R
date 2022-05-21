@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class 道具 : MonoBehaviour
 {
+    [Tooltip("可交互道具无需填写ID")]
     public int 道具ID;
+
     public ItemManager 道具管理器;
     public Text 旁白系统;
     public string 道具名;
