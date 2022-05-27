@@ -26,11 +26,13 @@ public class MonsterAi : MonoBehaviour
   //    info = ani.GetCurrentAnimatorStateInfo(0);
         float distance = Vector3.Distance(player.position, transform.position);
         Vector3 v = player.position;
+
+        //´¥·¢×·Öð
         if (other.gameObject.tag == "Player")
         {
+            isFollowAction = true;
             this.gameObject.GetComponent<Animator>().SetBool("run", true);
             isPatrolAction = false;
-            isFollowAction = true;
             transform.LookAt(v);
             agent.speed = 2f;
             agent.isStopped = false;
@@ -66,6 +68,7 @@ public class MonsterAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Ñ²Âß×´Ì¬
         if (isPatrolAction)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, Ðý×ª×ø±ê++, 0));
@@ -77,7 +80,7 @@ public class MonsterAi : MonoBehaviour
             {
 
             }
-            else if (System.Math.Abs(waitPosition.sqrMagnitude - this.transform.position.sqrMagnitude) < 5)
+            else if (System.Math.Abs(waitPosition.sqrMagnitude - this.transform.position.sqrMagnitude) <= 1)
             {
                 this.gameObject.GetComponent<Animator>().SetBool("run", false);
                 agent.isStopped = true;
