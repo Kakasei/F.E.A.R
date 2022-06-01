@@ -17,12 +17,13 @@ public class 马桶里的道具 : 道具
         base.拾取后触发();
         厕所门脚本.旋转速度 = 5.0f;
         厕所门脚本.被交互();
+        厕所门脚本.锁死 = true;
         StartCoroutine(锁门());
     }
-
-    private IEnumerator 锁门()
+    
+    public IEnumerator 锁门()
     {
-        yield return new WaitForSeconds(0.5f);
-        厕所门脚本.enabled = false;
+        yield return new WaitForSeconds(2.0f);
+        //厕所门脚本.enabled = false;
     }
 }

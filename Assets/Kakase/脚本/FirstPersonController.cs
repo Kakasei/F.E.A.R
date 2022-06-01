@@ -249,7 +249,6 @@ public class FirstPersonController : MonoBehaviour
 				if(交互射线信息.transform.CompareTag("item"))
 				{
 					交互射线信息.transform.gameObject.SendMessage("contact",SendMessageOptions.DontRequireReceiver);
-					Debug.Log(123);
 					交互射线信息.transform.gameObject.SendMessage("被交互",SendMessageOptions.DontRequireReceiver);
 				}
             }

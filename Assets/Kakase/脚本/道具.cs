@@ -21,8 +21,6 @@ public class 道具 : MonoBehaviour
 
     public void 被交互()
     {
-
-        Debug.Log(123456);
         switch (道具类型)
         {
             case 0:
@@ -41,10 +39,14 @@ public class 道具 : MonoBehaviour
 
     public void 可拾取道具()
     {
-        Debug.Log("test");
         旁白系统.SendMessage("ShowDialog", "获得了" + 道具名);
         道具管理器.获得道具(道具ID);
-        Destroy(gameObject);
+        //拾取到物品时，隐藏其模型和碰撞体，使其在游戏内呈现似乎已经被销毁的情况
+        //延迟五秒再销毁该物品，因为有时候拾取物品需要触发一些 用协程实现的，延迟几秒才生效的代码
+        //直接销毁会使得协程出错
+        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+        StartCoroutine(延迟删除物体());
     }
 
     public virtual void 拾取后触发()
@@ -62,4 +64,12 @@ public class 道具 : MonoBehaviour
     {
         Debug.Log("交互了" + 道具名);
     }
+
+    private IEnumerator 延迟删除物体()
+    {
+        yield return new WaitForSeconds(5.0f);
+        Debug.Log(this.name + "现在被彻底删除了");
+        Destroy(this.gameObject);
+    }
+    
 }
