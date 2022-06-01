@@ -8,7 +8,6 @@ public class 无锁门 : MonoBehaviour
     public bool 上锁 = false;
     public int 开锁所需的道具ID = 0;   //默认空手开门，即无锁
 
-    private Animator 动画器;
     private bool 已开 = false;
     private ItemManager 背包管理器;
     public Text 旁白系统;
@@ -19,7 +18,6 @@ public class 无锁门 : MonoBehaviour
 
     public void Start()
     {
-        动画器 = GetComponent<Animator>();
         背包管理器 = GameObject.FindWithTag("Player").GetComponent<ItemManager>();
         目标 = close;
     }
@@ -64,5 +62,4 @@ public class 无锁门 : MonoBehaviour
     {
         transform.rotation = Quaternion.Lerp(transform.rotation,目标.rotation,Time.deltaTime * 旋转速度);
     }
-
 }

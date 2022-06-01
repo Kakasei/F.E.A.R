@@ -9,8 +9,11 @@ public class 道具 : MonoBehaviour
     [Tooltip("可交互道具无需填写ID")]
     public int 道具ID;
 
+
     public ItemManager 道具管理器;
     public Text 旁白系统;
+
+    [Tooltip("道具名务必填一下")]
     public string 道具名;
 
     [Range(0, 1)] [Tooltip("0是可拾取道具，1是可交互道具")] [SerializeField]
@@ -19,14 +22,18 @@ public class 道具 : MonoBehaviour
     public void 被交互()
     {
 
+        Debug.Log(123456);
         switch (道具类型)
         {
             case 0:
+
                 可拾取道具();
                 拾取后触发();
                 break;
             case 1:
+                Debug.Log(123456);
                 可交互道具();
+                交互后触发();
                 break;
         }
     }
@@ -49,5 +56,10 @@ public class 道具 : MonoBehaviour
     public void 可交互道具()
     {
 
+    }
+
+    public virtual void 交互后触发()
+    {
+        Debug.Log("交互了" + 道具名);
     }
 }
