@@ -220,14 +220,6 @@ public class FirstPersonController : MonoBehaviour
 		}
 	}
 
-	private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
-	{
-		if (lfAngle < -360f) lfAngle += 360f;
-		if (lfAngle > 360f) lfAngle -= 360f;
-		return Mathf.Clamp(lfAngle, lfMin, lfMax);
-	}
-
-
 	//====================================kakase=================================
 
 	private void 手电筒()
@@ -249,14 +241,13 @@ public class FirstPersonController : MonoBehaviour
     {
 		if (Input.GetKeyDown("e"))
 		{
-			//按下e的时候，从眼睛处发射一条长度为5f的射线，射线触碰到的第一个物体的信息被装在“交互射线信息”里
+			//按下e的时候，从眼睛处发射一条长度为30f的射线，射线触碰到的第一个物体的信息被装在“交互射线信息”里
 			//最后一个参数64的意义：64的二进制1000000，表示该射线只会与第六图层产生碰撞
-			if(Physics.Raycast(主摄像机.transform.position, 主摄像机.transform.forward, out 交互射线信息, 5f,64))
+			if(Physics.Raycast(主摄像机.transform.position, 主摄像机.transform.forward, out 交互射线信息, 30f,64))
             {
 				Debug.Log(交互射线信息.transform.gameObject.name);
 				if(交互射线信息.transform.CompareTag("item"))
 				{
-					//
 					交互射线信息.transform.gameObject.SendMessage("contact",SendMessageOptions.DontRequireReceiver);
 					交互射线信息.transform.gameObject.SendMessage("被交互",SendMessageOptions.DontRequireReceiver);
 				}
@@ -277,6 +268,6 @@ public class FirstPersonController : MonoBehaviour
 
 		// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 		Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
-		Gizmos.DrawRay(new Ray(主摄像机.transform.position, 主摄像机.transform.forward*5));
+		Gizmos.DrawRay(new Ray(主摄像机.transform.position, 主摄像机.transform.forward*30));
 	}
 }

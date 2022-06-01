@@ -11,10 +11,6 @@ public class ItemManager : MonoBehaviour
 
     [SerializeField] private Image itemImage;
 
-    //private int 道具ID = 0;     //0是空手,2是key01，
-    //private int itemCount = 2;
-    //public List<bool> hasItem = new List<bool>(new bool[100]);
-
     public int 当前手持的道具ID = 0;     //默认为空手状态
     private int 持有道具种类 = 2;
     public List<int> 道具数量 = new List<int>(new int[100]);
