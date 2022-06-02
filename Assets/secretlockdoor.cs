@@ -5,91 +5,85 @@ using UnityEngine.UI;
 
 public class secretlockdoor : MonoBehaviour
 {
-    public GameObject ÃÜÂëËø;
-    public bool ÉÏËø = false;
-    public bool ËøËÀ = false;
-    public bool ÏÔÊ¾ÃÜÂëËø = false;
+    public GameObject å¯†ç é”;
+    public Text å¯†ç 1;
+    public Text å¯†ç 2;
+    public Text å¯†ç 3;
+    public Text å¯†ç 4;
+    public Text å¯†ç ;
+    public bool ä¸Šé” = false;
+    public bool æ˜¾ç¤ºå¯†ç é” = false;
 
-    public int ¿ªËøËùĞèµÄµÀ¾ßID = 0;   //Ä¬ÈÏ¿ÕÊÖ¿ªÃÅ£¬¼´ÎŞËø
+    public int å¼€é”æ‰€éœ€çš„é“å…·ID = 0;   //é»˜è®¤ç©ºæ‰‹å¼€é—¨ï¼Œå³æ— é”
 
-    private bool ÒÑ¿ª = false;
-    private ItemManager ±³°ü¹ÜÀíÆ÷;
-    public Text ÅÔ°×ÏµÍ³;
-    public float Ğı×ªËÙ¶È;
+    private bool å·²å¼€ = false;
+    private ItemManager èƒŒåŒ…ç®¡ç†å™¨;
+    public Text æ—ç™½ç³»ç»Ÿ;
+    public float æ—‹è½¬é€Ÿåº¦;
     public Transform open;
     public Transform close;
-    Transform Ä¿±ê;
+    Transform ç›®æ ‡;
 
     public void Start()
     {
-        ±³°ü¹ÜÀíÆ÷ = GameObject.FindWithTag("Player").GetComponent<ItemManager>();
-        Ä¿±ê = close;
-        Cursor.visible = ÏÔÊ¾ÃÜÂëËø;
+        èƒŒåŒ…ç®¡ç†å™¨ = GameObject.FindWithTag("Player").GetComponent<ItemManager>();
+        ç›®æ ‡ = close;
+        Cursor.visible = æ˜¾ç¤ºå¯†ç é”;
         Cursor.lockState = CursorLockMode.None;
     }
 
-    public void ±»½»»¥()
+    public void è¢«äº¤äº’()
     {
-        Debug.Log(this.name + "±»½»»¥");
-
-        //±»ËøËÀµÄÃÅÎŞÂÛÈçºÎ¶¼ÎŞ·¨´ò¿ª
-        if (ËøËÀ == false)
+        //å¯†ç é”è¦å¯†ç æ‰èƒ½æ‰“å¼€
+        if (ä¸Šé”)
         {
-            ÏÔÊ¾Ëø();
-            //ÉÏËøµÄÃÅĞèÒª¶ÔÓ¦Ô¿³×²ÅÄÜ´ò¿ª
-            if (ÉÏËø)
-            {
-                if (±³°ü¹ÜÀíÆ÷.ÏûºÄµÀ¾ß(¿ªËøËùĞèµÄµÀ¾ßID))  //Èç¹û³É¹¦ÏûºÄÁËËùĞèµÄ¿ªÃÅµÀ¾ß
-                {
-                    ÉÏËø = !ÉÏËø;
-                    ÅÔ°×ÏµÍ³.SendMessage("ShowDialog", "ÓÃÔ¿³×´ò¿ªÁËÃÅ");
-                    ¿ª»ò¹ØÃÅ();
-                }
-                else
-                {
-                    ÅÔ°×ÏµÍ³.SendMessage("ShowDialog", "Ã»ÓĞ¶ÔÓ¦µÄÔ¿³×");
-                }
-            }
-            else
-            {
-                ¿ª»ò¹ØÃÅ();
-            }
-        }
-        else if (ËøËÀ == true)
-        {
-            ÅÔ°×ÏµÍ³.SendMessage("ShowDialog", "´ò²»¿ª");
-            ÅÔ°×ÏµÍ³.SendMessage("ShowDialog", "ÔõÃ´°ì£¬´ÓÃ¨ÑÛ¿´¿´Ê²Ã´Çé¿ö°É");
-        }
-
-
-    }
-
-    private void ¿ª»ò¹ØÃÅ()
-    {
-        if (ÒÑ¿ª)
-        {
-            Ä¿±ê = close;
-            ÒÑ¿ª = !ÒÑ¿ª;
+            æ˜¾ç¤ºé”();
         }
         else
         {
-            Ä¿±ê = open;
-            ÒÑ¿ª = !ÒÑ¿ª;
+            å¼€æˆ–å…³é—¨();
         }
+
     }
 
-    public void ÏÔÊ¾Ëø()
+    private void å¼€æˆ–å…³é—¨()
     {
-        ÏÔÊ¾ÃÜÂëËø = !ÏÔÊ¾ÃÜÂëËø;
-        ÃÜÂëËø.SetActive(ÏÔÊ¾ÃÜÂëËø);
-        Cursor.visible = ÏÔÊ¾ÃÜÂëËø;
+        if (å·²å¼€)
+        {
+            ç›®æ ‡ = close;
+            å·²å¼€ = !å·²å¼€;
+        }
+        else
+        {
+            ç›®æ ‡ = open;
+            å·²å¼€ = !å·²å¼€;
+        }
+    }
+    public void æ£€æµ‹å¯†ç ()
+    {
+        å¯†ç .text= (int.Parse(å¯†ç 1.text)*1000+ int.Parse(å¯†ç 2.text) * 100+ int.Parse(å¯†ç 3.text) * 10 + int.Parse(å¯†ç 4.text)).ToString();
+        if (å¯†ç .text =="3200")
+        {
+            ä¸Šé” = !ä¸Šé”;
+            æ˜¾ç¤ºé”();
+            æ—ç™½ç³»ç»Ÿ.SendMessage("ShowDialog", "å¯†ç æ­£ç¡®");
+            å¼€æˆ–å…³é—¨();
+        }
+        else
+        {
+            æ˜¾ç¤ºé”();
+            æ—ç™½ç³»ç»Ÿ.SendMessage("ShowDialog", "å¯†ç é”™è¯¯");
+        }
+    }
+    public void æ˜¾ç¤ºé”()
+    {
+        æ˜¾ç¤ºå¯†ç é” = !æ˜¾ç¤ºå¯†ç é”;
+        å¯†ç é”.SetActive(æ˜¾ç¤ºå¯†ç é”);
+        Cursor.visible = æ˜¾ç¤ºå¯†ç é”;
         Cursor.lockState = CursorLockMode.None;
     }
     private void FixedUpdate()
     {
-        if (true)
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Ä¿±ê.rotation, Time.deltaTime * Ğı×ªËÙ¶È);
-        }
+        transform.rotation = Quaternion.Lerp(transform.rotation, ç›®æ ‡.rotation, Time.deltaTime * æ—‹è½¬é€Ÿåº¦);
     }
 }
