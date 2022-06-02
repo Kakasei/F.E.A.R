@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class 道具 : MonoBehaviour
 {
-    [Tooltip("可交互道具无需填写ID")]
+    [Tooltip("非可拾取道具无需填写ID")]
     public int 道具ID;
 
 
@@ -36,7 +36,6 @@ public class 道具 : MonoBehaviour
         }
     }
 
-
     public void 可拾取道具()
     {
         旁白系统.SendMessage("ShowDialog", "获得了" + 道具名);
@@ -53,7 +52,6 @@ public class 道具 : MonoBehaviour
     {
         Debug.Log("拾取了" + 道具名);
     }
-
 
     public void 可交互道具()
     {
