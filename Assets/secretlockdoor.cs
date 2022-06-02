@@ -1,19 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class secretlockdoor : MonoBehaviour
 {
     public GameObject 密码锁;
-    // Start is called before the first frame update
-    void Start()
+    public bool 上锁 = false;
+    public bool 锁死 = false;
+    public bool 显示密码锁 = false;
+
+    public int 开锁所需的道具ID = 0;   //默认空手开门，即无锁
+
+    private bool 已开 = false;
+    private ItemManager 背包管理器;
+    public Text 旁白系统;
+    public float 旋转速度;
+    public Transform open;
+    public Transform close;
+    Transform 目标;
+
+    public void Start()
     {
-        
+        背包管理器 = GameObject.FindWithTag("Player").GetComponent<ItemManager>();
+        目标 = close;
+        Cursor.visible = 显示密码锁;
+        Cursor.lockState = CursorLockMode.None;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void 被交互()
     {
-        
+        Debug.Log(this.name + "被交互");
+
+        //被锁死的门无论如何都无法打开
+        if (锁死 == false)
+        {
+            显示锁();
+            //上锁的门需要对应钥匙才能打开
+            if (上锁)
+            {
+                if (背包管理器.消耗道具(开锁所需的道具ID))  //如果成功消耗了所需的开门道具
+                {
+                    上锁 = !上锁;
+                    旁白系统.SendMessage("ShowDialog", "用钥匙打开了门");
+                    开或关门();
+                }
+                else
+                {
+                    旁白系统.SendMessage("ShowDialog", "没有对应的钥匙");
+                }
+            }
+            else
+            {
+                开或关门();
+            }
+        }
+        else if (锁死 == true)
+        {
+            旁白系统.SendMessage("ShowDialog", "打不开");
+            旁白系统.SendMessage("ShowDialog", "怎么办，从猫眼看看什么情况吧");
+        }
+
+
+    }
+
+    private void 开或关门()
+    {
+        if (已开)
+        {
+            目标 = close;
+            已开 = !已开;
+        }
+        else
+        {
+            目标 = open;
+            已开 = !已开;
+        }
+    }
+
+    public void 显示锁()
+    {
+        显示密码锁 = !显示密码锁;
+        密码锁.SetActive(显示密码锁);
+        Cursor.visible = 显示密码锁;
+        Cursor.lockState = CursorLockMode.None;
+    }
+    private void FixedUpdate()
+    {
+        if (true)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, 目标.rotation, Time.deltaTime * 旋转速度);
+        }
     }
 }

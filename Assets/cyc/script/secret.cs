@@ -8,8 +8,7 @@ public class secret : MonoBehaviour
     public Text Êý×Ö;
     private void Start()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        
     }
     public void NumberUp(Text Êý×Ö)
     {
