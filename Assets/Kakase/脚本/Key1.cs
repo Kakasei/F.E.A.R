@@ -25,7 +25,7 @@ public class Key1 : MonoBehaviour
     {
         Debug.Log(123);
         IM.获得道具(itemID);
-        //IM.addItem(itemID);
+
         Destroy(gameObject);
     }
 }
