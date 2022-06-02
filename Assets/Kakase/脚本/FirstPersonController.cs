@@ -79,14 +79,14 @@ public class FirstPersonController : MonoBehaviour
 
 
 
-	private RaycastHit ½»»¥ÉäÏßĞÅÏ¢;
-	public GameObject Ö÷ÉãÏñ»ú;
+	private RaycastHit äº¤äº’å°„çº¿ä¿¡æ¯;
+	public GameObject ä¸»æ‘„åƒæœº;
 	//===================kakase========
 
 
 	private void Awake()
 	{
-		Ö÷ÉãÏñ»ú = GameObject.FindGameObjectWithTag("MainCamera");
+		ä¸»æ‘„åƒæœº = GameObject.FindGameObjectWithTag("MainCamera");
 	}
 
 	private void Start()
@@ -108,13 +108,12 @@ public class FirstPersonController : MonoBehaviour
 		JumpAndGravity();
 		GroundedCheck();
 		Move();
-		useItem();
-		½»»¥();
+		äº¤äº’();
 	}
 
     private void LateUpdate()
     {
-		ÊÖµçÍ²();
+		æ‰‹ç”µç­’();
     }
     private void GroundedCheck()
 	{
@@ -222,37 +221,30 @@ public class FirstPersonController : MonoBehaviour
 
 	//====================================kakase=================================
 
-	private void ÊÖµçÍ²()
+	private void æ‰‹ç”µç­’()
     {
 		if(Input.GetKeyDown("f"))
         {
 			torch.enabled = !torch.enabled;
 		}
-		torch.transform.localEulerAngles = Ö÷ÉãÏñ»ú.transform.localEulerAngles;
+		torch.transform.localEulerAngles = ä¸»æ‘„åƒæœº.transform.localEulerAngles;
     }
 
-
-	private void useItem()
-	{
-
-	}
-
-	private void ½»»¥()
+	private void äº¤äº’()
     {
-		if (Input.GetKeyDown("e"))
+		if (Input.GetKeyDown(KeyCode.E))
 		{
-			//°´ÏÂeµÄÊ±ºò£¬´ÓÑÛ¾¦´¦·¢ÉäÒ»Ìõ³¤¶ÈÎª30fµÄÉäÏß£¬ÉäÏß´¥Åöµ½µÄµÚÒ»¸öÎïÌåµÄĞÅÏ¢±»×°ÔÚ¡°½»»¥ÉäÏßĞÅÏ¢¡±Àï
-			//×îºóÒ»¸ö²ÎÊı64µÄÒâÒå£º64µÄ¶ş½øÖÆ1000000£¬±íÊ¾¸ÃÉäÏßÖ»»áÓëµÚÁùÍ¼²ã²úÉúÅö×²
-			if(Physics.Raycast(Ö÷ÉãÏñ»ú.transform.position, Ö÷ÉãÏñ»ú.transform.forward, out ½»»¥ÉäÏßĞÅÏ¢, 30f,64))
+			//æŒ‰ä¸‹eçš„æ—¶å€™ï¼Œä»çœ¼ç›å¤„å‘å°„ä¸€æ¡é•¿åº¦ä¸º30fçš„å°„çº¿ï¼Œå°„çº¿è§¦ç¢°åˆ°çš„ç¬¬ä¸€ä¸ªç‰©ä½“çš„ä¿¡æ¯è¢«è£…åœ¨â€œäº¤äº’å°„çº¿ä¿¡æ¯â€é‡Œ
+			//æœ€åä¸€ä¸ªå‚æ•°64çš„æ„ä¹‰ï¼š64çš„äºŒè¿›åˆ¶1000000ï¼Œè¡¨ç¤ºè¯¥å°„çº¿åªä¼šä¸ç¬¬å…­å›¾å±‚äº§ç”Ÿç¢°æ’
+			if(Physics.Raycast(ä¸»æ‘„åƒæœº.transform.position, ä¸»æ‘„åƒæœº.transform.forward, out äº¤äº’å°„çº¿ä¿¡æ¯, 30f,64))
             {
-				Debug.Log(½»»¥ÉäÏßĞÅÏ¢.transform.gameObject.name);
-				if(½»»¥ÉäÏßĞÅÏ¢.transform.CompareTag("item"))
+				Debug.Log(äº¤äº’å°„çº¿ä¿¡æ¯.transform.gameObject.name);
+				if(äº¤äº’å°„çº¿ä¿¡æ¯.transform.CompareTag("item"))
 				{
-					½»»¥ÉäÏßĞÅÏ¢.transform.gameObject.SendMessage("contact",SendMessageOptions.DontRequireReceiver);
-					½»»¥ÉäÏßĞÅÏ¢.transform.gameObject.SendMessage("±»½»»¥",SendMessageOptions.DontRequireReceiver);
+					äº¤äº’å°„çº¿ä¿¡æ¯.transform.gameObject.SendMessage("contact",SendMessageOptions.DontRequireReceiver);
+					äº¤äº’å°„çº¿ä¿¡æ¯.transform.gameObject.SendMessage("è¢«äº¤äº’",SendMessageOptions.DontRequireReceiver);
 				}
             }
-
 		}
 	}
 
@@ -268,6 +260,6 @@ public class FirstPersonController : MonoBehaviour
 
 		// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 		Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
-		Gizmos.DrawRay(new Ray(Ö÷ÉãÏñ»ú.transform.position, Ö÷ÉãÏñ»ú.transform.forward*30));
+		Gizmos.DrawRay(new Ray(ä¸»æ‘„åƒæœº.transform.position, ä¸»æ‘„åƒæœº.transform.forward*30));
 	}
 }
