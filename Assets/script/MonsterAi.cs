@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public enum EnemyState
+/*public enum EnemyState
 {
     idle,
     run
-}
+}*/
 public class MonsterAi : MonoBehaviour
 {
-    public EnemyState CurrentState = EnemyState.idle;
+ //   public EnemyState CurrentState = EnemyState.idle;
     public Animator ani;
     private Transform player;
     public NavMeshAgent agent;
@@ -18,7 +18,12 @@ public class MonsterAi : MonoBehaviour
     private bool isFollowAction = false;
     private bool isPatrolAction = true;
     public Vector3 waitPosition;
-    // Start is called before the first frame update
+    public List<Vector3> patrolPosition = new List<Vector3>(new Vector3[7]);
+
+    float timer = 0;
+    int i = 0;
+
+    //   Start is called before the first frame update
 
     private void OnTriggerStay(Collider other)
     {
@@ -52,9 +57,10 @@ public class MonsterAi : MonoBehaviour
         //回到巡逻点
         if(other.gameObject.tag == "Player")
         {
+            this.gameObject.GetComponent<Animator>().SetBool("run", false);
             transform.LookAt(waitPosition);
             agent.SetDestination(waitPosition);
-            agent.speed = 0.5f;
+            agent.speed = 0.75f;
             isFollowAction = false;
         }
     }
@@ -71,8 +77,31 @@ public class MonsterAi : MonoBehaviour
         //巡逻状态
         if (isPatrolAction)
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 旋转坐标++, 0));
-            if (旋转坐标 >= 360) 旋转坐标 -= 360;
+            float dis = Vector3.Distance(transform.position, patrolPosition[i]);
+            if(dis <= 1f)
+            {
+                timer += Time.deltaTime;
+                if(timer >= 2f)
+                {
+                    i++;
+                    timer = 0;
+                }
+                if (i == 7) i = 0;
+            }
+            else
+            {
+                //   transform.position = Vector3.Lerp(transform.position, patrolPosition[i],0.01f);
+                transform.LookAt(patrolPosition[i]);
+                agent.speed = 1f;
+                agent.isStopped = false;
+                agent.SetDestination(patrolPosition[i]);
+            }
+                
+            
+          //  gameObject.GetComponent<Animator>().SetBool("patrol", true);
+
+            /*transform.rotation = Quaternion.Euler(new Vector3(0, 旋转坐标++, 0));
+            if (旋转坐标 >= 360) 旋转坐标 -= 360;*/
         }
         else
         {
