@@ -29,7 +29,6 @@ public class secretlockdoor : MonoBehaviour
         背包管理器 = GameObject.FindWithTag("Player").GetComponent<ItemManager>();
         目标 = close;
         Cursor.visible = 显示密码锁;
-        Cursor.lockState = CursorLockMode.None;
     }
 
     public void 被交互()
@@ -38,6 +37,7 @@ public class secretlockdoor : MonoBehaviour
         if (上锁)
         {
             显示锁();
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
@@ -66,12 +66,14 @@ public class secretlockdoor : MonoBehaviour
         {
             上锁 = !上锁;
             显示锁();
+            Cursor.lockState = CursorLockMode.Locked;
             旁白系统.SendMessage("ShowDialog", "密码正确");
             开或关门();
         }
         else
         {
             显示锁();
+            Cursor.lockState = CursorLockMode.Locked;
             旁白系统.SendMessage("ShowDialog", "密码错误");
         }
     }
@@ -80,7 +82,6 @@ public class secretlockdoor : MonoBehaviour
         显示密码锁 = !显示密码锁;
         密码锁.SetActive(显示密码锁);
         Cursor.visible = 显示密码锁;
-        Cursor.lockState = CursorLockMode.None;
     }
     private void FixedUpdate()
     {
