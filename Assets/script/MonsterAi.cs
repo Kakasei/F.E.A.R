@@ -54,7 +54,7 @@ public class MonsterAi : MonoBehaviour
         {
             transform.LookAt(waitPosition);
             agent.SetDestination(waitPosition);
-            agent.speed = 0.1f;
+            agent.speed = 0.5f;
             isFollowAction = false;
         }
     }
