@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class 抽屉 : 道具
 {
-    private Transform 起点;
-    private Transform 终点;
+    public Transform 起点;
+    public Transform 终点;
     private int 状态;
 
     private AudioSource 音频源;
@@ -17,10 +17,6 @@ public class 抽屉 : 道具
         音频源 = GetComponent<AudioSource>();
 
         状态 = 1;
-
-        起点 = GetComponentsInChildren<Transform>()[0];
-        终点 = GetComponentsInChildren<Transform>()[1];
-
     }
 
     public override void 交互后触发()
@@ -34,7 +30,8 @@ public class 抽屉 : 道具
         {
             状态 = 1;
         }
-        Debug.Log(终点.position);
+        Debug.Log(终点.ToString());
+        Debug.Log(起点.ToString());
     }
 
     private void FixedUpdate()
