@@ -14,7 +14,7 @@ public class 道具 : MonoBehaviour
     [Header("如果该道具不牵涉旁白，旁白系统不添加也行")]
     public Text 旁白系统;
 
-    [Range(0, 1)] [Tooltip("0是可拾取道具，1是可交互道具")] [SerializeField]
+    [Range(0, 1)] [Header("0是可拾取道具，1是可交互道具")] [SerializeField]
     private int 道具类型;
 
     public void 被交互()
