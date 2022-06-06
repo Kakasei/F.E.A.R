@@ -28,7 +28,6 @@ public class secretlockdoor : MonoBehaviour
     {
         背包管理器 = GameObject.FindWithTag("Player").GetComponent<ItemManager>();
         目标 = close;
-        Cursor.visible = 显示密码锁;
     }
 
     public void 被交互()
