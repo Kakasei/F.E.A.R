@@ -6,11 +6,19 @@ using UnityEngine.UI;
 
 public class 道具 : MonoBehaviour
 {
+    [Header("没有音效可以留空")]
+    public AudioClip 交互音效;
+    public AudioClip 拾取音效;
+    private AudioSource 音频源;
+
+
     [Tooltip("非可拾取道具无需填写ID")]
     public int 道具ID;
 
 
     public ItemManager 道具管理器;
+
+    [Header("如果该道具不牵涉旁白，旁白系统不添加也行")]
     public Text 旁白系统;
 
     [Tooltip("道具名务必填一下")]
@@ -61,6 +69,10 @@ public class 道具 : MonoBehaviour
     public virtual void 交互后触发()
     {
         Debug.Log("交互了" + 道具名);
+        if (交互音效) 
+        {
+            
+        }
     }
 
     private IEnumerator 延迟删除物体()
