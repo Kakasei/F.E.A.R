@@ -9,7 +9,7 @@ public class 可旋转的家具 : 道具
     private Quaternion 关;
     private int 状态;
 
-    public float 旋转速度;
+    public float 旋转速度=2.0f;
     [Header("旋转角度")]
     public float x;
     public float y;
