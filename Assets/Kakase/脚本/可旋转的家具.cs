@@ -25,7 +25,6 @@ public class 可旋转的家具 : 道具
 
     public override void 交互后触发()
     {
-        Debug.Log(this.transform.rotation);
         if(状态==1)
         {
             状态 = 0;
@@ -33,8 +32,6 @@ public class 可旋转的家具 : 道具
         {
             状态 = 1;
         }
-        Debug.Log(Quaternion.Euler(开));
-
     }
 
     private void FixedUpdate()

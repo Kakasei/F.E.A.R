@@ -6,23 +6,13 @@ using UnityEngine.UI;
 
 public class 道具 : MonoBehaviour
 {
-    [Header("没有音效可以留空")]
-    public AudioClip 交互音效;
-    public AudioClip 拾取音效;
-    private AudioSource 音频源;
-
-
-    [Tooltip("非可拾取道具无需填写ID")]
+    [Header("交互型道具可以不管这以下几项")]
     public int 道具ID;
-
-
     public ItemManager 道具管理器;
+    public string 道具名;
 
     [Header("如果该道具不牵涉旁白，旁白系统不添加也行")]
     public Text 旁白系统;
-
-    [Tooltip("道具名务必填一下")]
-    public string 道具名;
 
     [Range(0, 1)] [Tooltip("0是可拾取道具，1是可交互道具")] [SerializeField]
     private int 道具类型;
@@ -32,12 +22,10 @@ public class 道具 : MonoBehaviour
         switch (道具类型)
         {
             case 0:
-
                 可拾取道具();
                 拾取后触发();
                 break;
             case 1:
-                Debug.Log(123456);
                 可交互道具();
                 交互后触发();
                 break;
@@ -69,10 +57,6 @@ public class 道具 : MonoBehaviour
     public virtual void 交互后触发()
     {
         Debug.Log("交互了" + 道具名);
-        if (交互音效) 
-        {
-            
-        }
     }
 
     private IEnumerator 延迟删除物体()
