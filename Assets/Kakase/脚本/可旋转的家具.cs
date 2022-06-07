@@ -4,31 +4,25 @@ using UnityEngine;
 
 public class 可旋转的家具 : 道具
 {
-    private Vector3 开;
-
-    private Quaternion 关;
+    public Transform 起点;
+    public Transform 终点;
     private int 状态;
 
-    public float 旋转速度=2.0f;
-    [Header("旋转角度")]
-    public float x;
-    public float y;
-    public float z;
+    public float 开关速度=2.0f;
 
     private void Start()
     {
         状态 = 1;
 
-        关 = this.transform.rotation;
-        开 = new Vector3(x, y, z);
     }
 
     public override void 交互后触发()
     {
-        if(状态==1)
+        if (状态 == 1)
         {
             状态 = 0;
-        }else if(状态==0)
+        }
+        else if (状态 == 0)
         {
             状态 = 1;
         }
@@ -36,15 +30,14 @@ public class 可旋转的家具 : 道具
 
     private void FixedUpdate()
     {
-        if(状态==0)
+        if (状态 == 0)
         {
-            transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(开), Time.deltaTime * 旋转速度);
-        }else if(状态==1)
-        {
-            transform.rotation = Quaternion.Lerp(this.transform.rotation, 关, Time.deltaTime * 旋转速度);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, 终点.rotation, Time.deltaTime * 开关速度);
         }
-
-
+        else if (状态 == 1)
+        {
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, 起点.rotation, Time.deltaTime * 开关速度);
+        }
     }
 
 }

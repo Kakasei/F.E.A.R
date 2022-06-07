@@ -52,7 +52,7 @@ public class 无锁门 : MonoBehaviour
             }
             else
             {
-                旁白系统.SendMessage("ShowDialog", "没有对应的钥匙");
+                旁白系统.SendMessage("ShowDialog", "锁住了，打不开");
             }
         }
         else
