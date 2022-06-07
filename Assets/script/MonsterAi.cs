@@ -36,11 +36,11 @@ public class MonsterAi : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             isFollowAction = true;
+            agent.isStopped = false;
             this.gameObject.GetComponent<Animator>().SetBool("run", true);
             isPatrolAction = false;
             transform.LookAt(v);
             agent.speed = 2f;
-            agent.isStopped = false;
             agent.SetDestination(player.position);
 
             //×·ÉÏÖ÷½Ç Ö÷½Çdie
