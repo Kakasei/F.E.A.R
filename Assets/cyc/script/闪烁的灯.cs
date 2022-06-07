@@ -37,7 +37,7 @@ public class 闪烁的灯 : MonoBehaviour
             }
         }*/
         timer += Time.deltaTime;
-        if (timer%5>3)
+        if (timer%2>1)
         {
             alarmLight.intensity = highIntensity;
         }
