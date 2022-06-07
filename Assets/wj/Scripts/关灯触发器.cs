@@ -7,9 +7,11 @@ public class 关灯触发器 : MonoBehaviour
     private FirstPersonController fpC;
     private Light torch;
     public 无锁门 无锁门;
+    public DialogSystem DS;
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
+        DS.SendMessage("ShowDialog", "手电筒突然没电了");
         torch = other.gameObject.GetComponentInChildren<Light>();
         fpC = other.gameObject.GetComponent<FirstPersonController>();
         fpC.禁用手电 = true;
