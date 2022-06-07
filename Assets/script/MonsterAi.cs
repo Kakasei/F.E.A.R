@@ -20,6 +20,9 @@ public class MonsterAi : MonoBehaviour
     public Vector3 waitPosition;
     public List<Vector3> patrolPosition = new List<Vector3>(new Vector3[7]);
 
+    public GameObject 死亡画面;
+    private BoxCollider 碰撞体;
+
     private AudioSource ChasingAudio;
 
     float timer = 0;
@@ -74,6 +77,7 @@ public class MonsterAi : MonoBehaviour
         player = GameObject.FindWithTag("Player").transform;
         waitPosition = this.transform.position;
         ChasingAudio = GetComponent<AudioSource>();
+        碰撞体 = gameObject.GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -126,6 +130,9 @@ public class MonsterAi : MonoBehaviour
                 {
                     this.gameObject.GetComponent<Animator>().SetBool("run", false);
                     agent.isStopped = true;
+                    死亡画面.SetActive(true);
+                    碰撞体.enabled = false;
+                    StartCoroutine(播放完后删除());
                 }
             }
             else if (System.Math.Abs(waitPosition.sqrMagnitude - this.transform.position.sqrMagnitude) <= 1)
@@ -135,30 +142,11 @@ public class MonsterAi : MonoBehaviour
                 isPatrolAction = true;
             }  
         }
-        
-
-        /*switch (CurrentState)
-        {
-            case EnemyState.idle:
-                if (distance > stopdistance)
-                {
-                    CurrentState = EnemyState.run;
-                }
-                ani.Play("idle");
-                transform.LookAt(v);
-                agent.isStopped = true;
-                break;
-            case EnemyState.run:
-                if (distance <= stopdistance)
-                {
-                    CurrentState = EnemyState.idle;
-                }
-                transform.LookAt(v);
-                agent.speed = 1.5f;
-                ani.Play("run");
-                agent.isStopped = false;
-                agent.SetDestination(player.position);
-                break;
-        }*/
+    }
+    private IEnumerator 播放完后删除()
+    {
+        yield return new WaitForSeconds(4.0f);
+        Destroy(死亡画面);
+        Destroy(this.gameObject);
     }
 }
