@@ -43,11 +43,11 @@ public class 捡钥匙触发血手印 : MonoBehaviour
             血手印集[i].gameObject.SetActive(true);
             音频源.Play();
         }
-        yield return new WaitForSeconds(1.0f);
         if (无锁门.已开)
         {
             无锁门.开或关门();
         }
+        yield return new WaitForSeconds(1.0f);
         敲门.Play();
         
     }
