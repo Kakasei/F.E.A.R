@@ -75,7 +75,7 @@ public class FirstPersonController : MonoBehaviour
 	//===================kakase========
 	public Light torch;
 	private bool isTorchOn = true;
-
+	public bool 禁用手电 = false;
 
 	public Canvas UI;
 
@@ -228,7 +228,7 @@ public class FirstPersonController : MonoBehaviour
 
 	private void 手电筒()
     {
-		if(Input.GetKeyDown("f"))
+		if(Input.GetKeyDown("f") && !禁用手电)
         {
 			torch.enabled = !torch.enabled;
 		}

@@ -10,7 +10,7 @@ public class 无锁门 : MonoBehaviour
 
     public int 开锁所需的道具ID = 0;   //默认空手开门，即无锁
 
-    private bool 已开 = false;
+    public bool 已开 = false;
     private ItemManager 背包管理器;
     public Text 旁白系统;
     public float 旋转速度;
@@ -62,7 +62,7 @@ public class 无锁门 : MonoBehaviour
 
     }
 
-    private void 开或关门()
+    public void 开或关门()
     {
     //    音频源.Play();
         if (已开)
