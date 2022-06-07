@@ -14,6 +14,7 @@ public class ItemManager : MonoBehaviour
 
     public List<int> 道具数量 = new List<int>(new int[100]);
 
+    public DialogSystem DS;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class ItemManager : MonoBehaviour
     void Update()
     {
         鼠标滚轮切换道具();
+        查看纸条();
     }
 
     private void 鼠标滚轮切换道具()
@@ -94,6 +96,23 @@ public class ItemManager : MonoBehaviour
     public void 获得道具(int ID)
     {
         道具数量[ID]++;
+    }
+
+    public void 查看纸条()
+    {
+        if(Input.GetKeyDown(KeyCode.Q)&&(当前手持的道具ID==5))
+        {
+            DS.SendMessage("ShowDialog", "纸条上写着：1-4");
+        }else if(Input.GetKeyDown(KeyCode.Q) && (当前手持的道具ID == 6))
+        {
+            DS.SendMessage("ShowDialog", "纸条上写着：2-3");
+        }else if (Input.GetKeyDown(KeyCode.Q) && (当前手持的道具ID == 7))
+        {
+            DS.SendMessage("ShowDialog", "纸条上写着：3-9");
+        }else if (Input.GetKeyDown(KeyCode.Q) && (当前手持的道具ID == 8))
+        {
+            DS.SendMessage("ShowDialog", "纸条上写着：4-6");
+        }
     }
 
 }
