@@ -25,7 +25,7 @@ public class 猫眼 : 道具
 
     private IEnumerator 鬼图播放完后删除()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(8.0f);
         Debug.Log(this.name + "现在被彻底删除了");
         Destroy(猫眼鬼图);
         厕所门脚本.锁死 = false;
