@@ -19,6 +19,9 @@ public class 无锁门 : MonoBehaviour
     public Transform close;
     Transform 目标;
 
+    [Header("这里填开门所用的道具名称")][SerializeField]
+    private string 所需的道具的名称;
+
     public AudioClip 开门音效, 关门音效;
 
     private AudioSource 音频源;
@@ -47,7 +50,7 @@ public class 无锁门 : MonoBehaviour
                 if (背包管理器.消耗道具(开锁所需的道具ID))  //如果成功消耗了所需的开门道具
                 {
                     上锁 = !上锁;
-                    旁白系统.SendMessage("ShowDialog", "用钥匙打开了门");
+                    旁白系统.SendMessage("ShowDialog", "用"+所需的道具的名称+"打开了门");
                     开或关门();
                 }
                 else
