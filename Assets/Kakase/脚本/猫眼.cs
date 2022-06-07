@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class 猫眼 : 道具
 {
     public GameObject 猫眼鬼图;
-    public 无锁门 厕所门脚本;
+    public 厕所门 厕所门脚本;
 
     [HideInInspector]
     public BoxCollider 碰撞体;
