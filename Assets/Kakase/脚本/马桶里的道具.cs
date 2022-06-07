@@ -6,17 +6,21 @@ public class 马桶里的道具 : 道具
 {
     public 厕所门 厕所门脚本;
     public 猫眼 猫眼脚本;
+    private AudioSource 音频源;
 
-    private void Start()
+    private void Awake()
     {
-        
+        音频源 = GetComponent<AudioSource>();
     }
+
 
 
 
     public override void 拾取后触发()
     {
         base.拾取后触发();
+
+        音频源.Play();
 
         //拾取到马桶里的道具后，调用厕所门和猫眼脚本，使厕所门锁死，猫眼鬼图模块激活
         厕所门脚本.旋转速度 = 5.0f;
