@@ -14,7 +14,6 @@ public class 猫眼 : 道具
     private void Start()
     {
         碰撞体 = this.gameObject.GetComponent<BoxCollider>();
-        
     }
 
     public override void 交互后触发()
@@ -22,12 +21,11 @@ public class 猫眼 : 道具
         猫眼鬼图.SetActive(true);
         碰撞体.enabled = false;
         StartCoroutine(鬼图播放完后删除());
-
     }
 
     private IEnumerator 鬼图播放完后删除()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(8.0f);
         Debug.Log(this.name + "现在被彻底删除了");
         Destroy(猫眼鬼图);
         厕所门脚本.锁死 = false;

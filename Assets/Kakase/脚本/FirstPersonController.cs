@@ -239,9 +239,9 @@ public class FirstPersonController : MonoBehaviour
     {
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			//按下e的时候，从眼睛处发射一条长度为30f的射线，射线触碰到的第一个物体的信息被装在“交互射线信息”里
+			//按下e的时候，从眼睛处发射一条长度为3f的射线，射线触碰到的第一个物体的信息被装在“交互射线信息”里
 			//最后一个参数64的意义：64的二进制1000000，表示该射线只会与第六图层产生碰撞
-			if(Physics.Raycast(主摄像机.transform.position, 主摄像机.transform.forward, out 交互射线信息, 30f,64))
+			if(Physics.Raycast(主摄像机.transform.position, 主摄像机.transform.forward, out 交互射线信息, 3f,64))
             {
 				Debug.Log(交互射线信息.transform.gameObject.name);
 				if(交互射线信息.transform.CompareTag("item"))
