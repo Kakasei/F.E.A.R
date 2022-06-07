@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class 道具 : MonoBehaviour
 {
-    [Header("交互型道具可以不管这以下几项")]
+    [Header("交互型道具可以不管以下几项")]
     public int 道具ID;
     public ItemManager 道具管理器;
     public string 道具名;
@@ -48,6 +48,8 @@ public class 道具 : MonoBehaviour
     {
         Debug.Log("拾取了" + 道具名);
     }
+
+
 
     public void 可交互道具()
     {

@@ -8,7 +8,6 @@ public class ItemManager : MonoBehaviour
     public Canvas UI;
 
 
-
     [SerializeField] private Image itemImage;
 
     public int 当前手持的道具ID = 0;     //默认为空手状态
@@ -18,8 +17,6 @@ public class ItemManager : MonoBehaviour
 
     void Start()
     {
-        //hasItem[0] = true;
-        //hasItem[1] = true;
         itemImage = UI.GetComponentInChildren<Image>();
         道具数量[0] = 1;
         道具数量[1] = 1;
@@ -77,48 +74,6 @@ public class ItemManager : MonoBehaviour
         return ID;
     }
 
-    /*
-
-    private int ClampItem1(int n)
-    {
-        while ( n == itemCount ||!hasItem[n])
-        {
-            n++;
-            if (n >= itemCount) n = 0;
-        }
-        return n;
-    }
-    private int ClampItem0(int n)
-    {
-        while (n < 0 || !hasItem[n])
-        {
-            n--;
-            if (n < 0) n = itemCount - 1;
-        }
-        return n;
-    }*/
-    /*
-    public void addItem(int 道具ID)
-    {
-        hasItem[道具ID] = true;
-        itemCount++;
-    }
-    *//*
-    public bool useItem(int 道具ID)
-    {
-        if(hasItem[道具ID])
-        {
-            hasItem[道具ID] = false;
-            道具ID++;
-            道具ID = ClampItem1(道具ID);
-            scrollItemUI(道具ID);
-            return true;
-        }else
-        {
-            return false;
-        }
-    }
-    */
     public bool 消耗道具(int 道具ID)
     {
         if(道具数量[道具ID]>=1)
