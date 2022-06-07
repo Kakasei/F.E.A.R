@@ -20,26 +20,29 @@ public class MonsterAi : MonoBehaviour
     public Vector3 waitPosition;
     public List<Vector3> patrolPosition = new List<Vector3>(new Vector3[7]);
 
+    private AudioSource ChasingAudio;
+
     float timer = 0;
     int i = 0;
 
     //   Start is called before the first frame update
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        double stopdistance = 1.5;
+        /*double stopdistance = 1.5f;
   //    info = ani.GetCurrentAnimatorStateInfo(0);
         float distance = Vector3.Distance(player.position, transform.position);
-        Vector3 v = player.position;
+        Vector3 v = player.position;*/
 
         //´¥·¢×·Öð
         if (other.gameObject.tag == "Player")
         {
+            ChasingAudio.Play();
+            isPatrolAction = false;
             isFollowAction = true;
             agent.isStopped = false;
             this.gameObject.GetComponent<Animator>().SetBool("run", true);
-            isPatrolAction = false;
-            transform.LookAt(v);
+           /* transform.LookAt(v);
             agent.speed = 2f;
             agent.SetDestination(player.position);
 
@@ -48,7 +51,7 @@ public class MonsterAi : MonoBehaviour
             {
                 this.gameObject.GetComponent<Animator>().SetBool("run", false);
                 agent.isStopped = true;
-            }
+            }*/
         }
     }
 
@@ -57,11 +60,12 @@ public class MonsterAi : MonoBehaviour
         //»Øµ½Ñ²Âßµã
         if(other.gameObject.tag == "Player")
         {
+            isFollowAction = false;
+            ChasingAudio.Stop();
             this.gameObject.GetComponent<Animator>().SetBool("run", false);
             transform.LookAt(waitPosition);
             agent.SetDestination(waitPosition);
             agent.speed = 0.75f;
-            isFollowAction = false;
         }
     }
 
@@ -69,11 +73,16 @@ public class MonsterAi : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         waitPosition = this.transform.position;
+        ChasingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        double stopdistance = 1.5f;
+        //    info = ani.GetCurrentAnimatorStateInfo(0);
+        float distance = Vector3.Distance(player.position, transform.position);
+        Vector3 v = player.position;
         //Ñ²Âß×´Ì¬
         if (isPatrolAction)
         {
@@ -107,7 +116,17 @@ public class MonsterAi : MonoBehaviour
         {
             if (isFollowAction)
             {
+                this.gameObject.GetComponent<Animator>().SetBool("run", true);
+                transform.LookAt(v);
+                agent.speed = 2f;
+                agent.SetDestination(player.position);
 
+                //×·ÉÏÖ÷½Ç Ö÷½Çdie
+                if (distance <= stopdistance)
+                {
+                    this.gameObject.GetComponent<Animator>().SetBool("run", false);
+                    agent.isStopped = true;
+                }
             }
             else if (System.Math.Abs(waitPosition.sqrMagnitude - this.transform.position.sqrMagnitude) <= 1)
             {

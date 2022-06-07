@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+[RequireComponent(typeof(AudioSource))]
 
 public class 无锁门 : MonoBehaviour
 {
@@ -17,6 +18,15 @@ public class 无锁门 : MonoBehaviour
     public Transform open;
     public Transform close;
     Transform 目标;
+
+    public AudioClip 开门音效, 关门音效;
+
+    private AudioSource 音频源;
+
+    private void Awake()
+    {
+        音频源 = GetComponent<AudioSource>();
+    }
 
     public void Start()
     {
@@ -60,13 +70,18 @@ public class 无锁门 : MonoBehaviour
 
     private void 开或关门()
     {
+    //    音频源.Play();
         if (已开)
         {
+            音频源.clip = 关门音效;
+            音频源.Play();
             目标 = close;
             已开 = !已开;
         }
         else
         {
+            音频源.clip = 开门音效;
+            音频源.Play();
             目标 = open;
             已开 = !已开;
         }
