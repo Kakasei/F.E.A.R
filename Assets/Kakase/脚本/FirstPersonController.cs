@@ -66,6 +66,8 @@ public class FirstPersonController : MonoBehaviour
 	private StarterAssetsInputs _input;
 	private GameObject _mainCamera;
 
+	private AudioSource 脚步;
+
 	private const float _threshold = 0.00001f;
 
 	private bool IsCurrentDeviceMouse => _playerInput.currentControlScheme == "KeyboardMouse";
@@ -95,7 +97,7 @@ public class FirstPersonController : MonoBehaviour
 		_input = GetComponent<StarterAssetsInputs>();
 		_playerInput = GetComponent<PlayerInput>();
 
-
+		脚步 = GetComponent<AudioSource>();
 
 		// reset our timeouts on start
 		_jumpTimeoutDelta = JumpTimeout;
@@ -109,6 +111,8 @@ public class FirstPersonController : MonoBehaviour
 		GroundedCheck();
 		Move();
 		交互();
+		脚步声();
+		
 	}
 
     private void LateUpdate()
@@ -169,6 +173,7 @@ public class FirstPersonController : MonoBehaviour
 
 		// move the player
 		_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
 	}
 
 	private void JumpAndGravity()
@@ -247,6 +252,30 @@ public class FirstPersonController : MonoBehaviour
             }
 		}
 	}
+
+	private void 脚步声()
+	{
+		/*if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S)|| Input.GetKeyDown(KeyCode.A)|| Input.GetKeyDown(KeyCode.D))
+        {
+			脚步.Play();
+        }*/
+
+		if (Grounded && _speed >= 0.01f)
+        {
+            if (!脚步.isPlaying)
+            {
+				脚步.Play();
+            }
+        }
+        else
+        {
+            if (脚步.isPlaying)
+            {
+				脚步.Pause();
+            }
+        }
+    } 
+
 
 	//====================================kakase=================================
 
