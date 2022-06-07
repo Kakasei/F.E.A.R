@@ -44,8 +44,7 @@ public class 厕所门 : MonoBehaviour
         }
         else if (锁死 == true)
         {
-            旁白系统.SendMessage("ShowDialog", "打不开");
-            旁白系统.SendMessage("ShowDialog", "怎么办，从猫眼看看什么情况吧");
+            旁白系统.SendMessage("ShowDialog", "打不开,从猫眼看看什么情况吧");
         }
 
 
