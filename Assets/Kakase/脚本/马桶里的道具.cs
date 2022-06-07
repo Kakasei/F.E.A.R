@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class 马桶里的道具 : 道具
 {
-    public 无锁门 厕所门脚本;
+    public 厕所门 厕所门脚本;
     public 猫眼 猫眼脚本;
 
     private void Start()

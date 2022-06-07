@@ -11,7 +11,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private Image itemImage;
 
     public int 当前手持的道具ID = 0;     //默认为空手状态
-    private int 持有道具种类 = 2;
+
     public List<int> 道具数量 = new List<int>(new int[100]);
 
 
@@ -93,7 +93,7 @@ public class ItemManager : MonoBehaviour
     
     public void 获得道具(int ID)
     {
-        if (道具数量[ID] == 0) 持有道具种类++;
         道具数量[ID]++;
     }
+
 }
