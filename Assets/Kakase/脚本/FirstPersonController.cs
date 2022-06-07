@@ -93,6 +93,10 @@ public class FirstPersonController : MonoBehaviour
 
 	private void Start()
 	{
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+
+
 		_controller = GetComponent<CharacterController>();
 		_input = GetComponent<StarterAssetsInputs>();
 		_playerInput = GetComponent<PlayerInput>();
