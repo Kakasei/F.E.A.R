@@ -13,7 +13,6 @@ public class 可旋转的家具 : 道具
     private void Start()
     {
         状态 = 1;
-
     }
 
     public override void 交互后触发()
