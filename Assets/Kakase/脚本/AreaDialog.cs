@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class AreaDialog : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class AreaDialog : MonoBehaviour
             Debug.Log(12345);
             dialogSystem.SendMessage("ShowDialog", dialog);
             Destroy(gameObject);
+            SceneManager.LoadScene("complete");
         }
     }
 }

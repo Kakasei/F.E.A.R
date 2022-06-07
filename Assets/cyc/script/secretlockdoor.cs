@@ -61,7 +61,7 @@ public class secretlockdoor : MonoBehaviour
     public void 检测密码()
     {
         密码.text= (int.Parse(密码1.text)*1000+ int.Parse(密码2.text) * 100+ int.Parse(密码3.text) * 10 + int.Parse(密码4.text)).ToString();
-        if (密码.text =="3200")
+        if (密码.text =="4396")
         {
             上锁 = !上锁;
             显示锁();
