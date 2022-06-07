@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 /*public enum EnemyState
 {
     idle,
@@ -148,5 +149,6 @@ public class MonsterAi : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
         Destroy(À¿Õˆª≠√Ê);
         Destroy(this.gameObject);
+        SceneManager.LoadScene("youdead");
     }
 }
